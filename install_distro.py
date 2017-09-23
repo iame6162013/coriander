@@ -129,6 +129,7 @@ def install_llvm(install_dir):
     global llvm_dir
     # install to current directory?
     cd(install_dir)
+    run(['rm', '-f', 'soft'])
     makedir('soft')
     cd('soft')
     target_url = {
@@ -141,7 +142,7 @@ def install_llvm(install_dir):
     if filename.endswith('.tar.xz'):
         run(['tar', '-xf', filename])
         unzip_name = filename.replace('.tar.xz', '')
-        run(['mv', '-T', unzip_name, 'llvm-4.0'])
+        run(['mv', unzip_name, 'llvm-4.0'])
         cd_repo_root()
         llvm_dir = path.abspath(join(install_dir, 'soft', 'llvm-4.0'))
         if is_llvm_dir(llvm_dir):
